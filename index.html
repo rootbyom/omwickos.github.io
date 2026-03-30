@@ -2598,6 +2598,447 @@
         display: none
       }
     }
+
+    /* ================================================================
+       PREMIUM EFFECTS — NOISE · GLITCH · NEON · 3D · GLOW
+       ================================================================ */
+
+    /* ---- NOISE GRAIN OVERLAY ---- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9989;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      mix-blend-mode: overlay;
+    }
+
+    /* ---- GLITCH TEXT EFFECT ---- */
+    .glitch {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      overflow: hidden;
+      clip-path: inset(0);
+    }
+
+    .glitch::before {
+      color: var(--cyan);
+      animation: glitch-shift-1 4s infinite linear alternate-reverse;
+      opacity: 0.7;
+    }
+
+    .glitch::after {
+      color: var(--red);
+      animation: glitch-shift-2 3s infinite linear alternate-reverse;
+      opacity: 0.7;
+    }
+
+    .glitch.active::before {
+      animation: glitch-intense-1 0.3s steps(2) forwards;
+    }
+
+    .glitch.active::after {
+      animation: glitch-intense-2 0.3s steps(2) forwards;
+    }
+
+    @keyframes glitch-shift-1 {
+
+      0%,
+      90%,
+      100% {
+        clip-path: inset(0 0 98% 0);
+        transform: translate(0);
+      }
+
+      92% {
+        clip-path: inset(40% 0 30% 0);
+        transform: translate(-3px, 1px);
+      }
+
+      94% {
+        clip-path: inset(70% 0 10% 0);
+        transform: translate(2px, -1px);
+      }
+
+      96% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translate(-1px, 2px);
+      }
+
+      98% {
+        clip-path: inset(0 0 98% 0);
+        transform: translate(0);
+      }
+    }
+
+    @keyframes glitch-shift-2 {
+
+      0%,
+      88%,
+      100% {
+        clip-path: inset(98% 0 0 0);
+        transform: translate(0);
+      }
+
+      90% {
+        clip-path: inset(20% 0 50% 0);
+        transform: translate(3px, -1px);
+      }
+
+      93% {
+        clip-path: inset(60% 0 20% 0);
+        transform: translate(-2px, 1px);
+      }
+
+      96% {
+        clip-path: inset(5% 0 80% 0);
+        transform: translate(1px, -2px);
+      }
+    }
+
+    @keyframes glitch-intense-1 {
+      0% {
+        clip-path: inset(20% 0 40% 0);
+        transform: translate(-6px, 2px);
+      }
+
+      25% {
+        clip-path: inset(60% 0 10% 0);
+        transform: translate(4px, -3px);
+      }
+
+      50% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translate(-3px, 1px);
+      }
+
+      75% {
+        clip-path: inset(45% 0 25% 0);
+        transform: translate(5px, -1px);
+      }
+
+      100% {
+        clip-path: inset(0 0 98% 0);
+        transform: translate(0);
+      }
+    }
+
+    @keyframes glitch-intense-2 {
+      0% {
+        clip-path: inset(50% 0 20% 0);
+        transform: translate(5px, -2px);
+      }
+
+      25% {
+        clip-path: inset(15% 0 55% 0);
+        transform: translate(-4px, 3px);
+      }
+
+      50% {
+        clip-path: inset(70% 0 5% 0);
+        transform: translate(3px, -1px);
+      }
+
+      75% {
+        clip-path: inset(30% 0 40% 0);
+        transform: translate(-5px, 1px);
+      }
+
+      100% {
+        clip-path: inset(98% 0 0 0);
+        transform: translate(0);
+      }
+    }
+
+    /* ---- NEON GLOW ON SECTION LABELS ---- */
+    .section-label {
+      text-shadow: 0 0 10px rgba(230, 57, 70, 0.4), 0 0 40px rgba(230, 57, 70, 0.1);
+    }
+
+    .hero-eyebrow {
+      text-shadow: 0 0 12px rgba(230, 57, 70, 0.5), 0 0 40px rgba(230, 57, 70, 0.15);
+    }
+
+    /* ---- PULSING DOWNLOAD CTA ---- */
+    .btn-primary {
+      animation: ctaPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes ctaPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 20px rgba(230, 57, 70, 0.25);
+      }
+
+      50% {
+        box-shadow: 0 8px 40px rgba(230, 57, 70, 0.5), 0 0 60px rgba(230, 57, 70, 0.15);
+      }
+    }
+
+    .btn-primary:hover {
+      animation: none;
+    }
+
+    /* ---- VERSION BADGE ---- */
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      color: var(--green);
+      background: rgba(57, 255, 20, 0.06);
+      border-radius: 20px;
+      margin-left: 16px;
+      vertical-align: middle;
+      animation: slideUp .9s .4s var(--ease) forwards;
+      opacity: 0;
+    }
+
+    .version-badge .live-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+      box-shadow: 0 0 6px var(--green);
+    }
+
+    /* ---- ENHANCED SCROLL PROGRESS ---- */
+    .scroll-progress {
+      height: 3px;
+      box-shadow: 0 0 12px rgba(230, 57, 70, 0.6), 0 0 30px rgba(0, 240, 255, 0.3);
+    }
+
+    /* ---- 3D CARD TILT ---- */
+    .feat-card,
+    .agent-card,
+    .battle-card,
+    .tool-card,
+    .spec-card,
+    .showcase-card {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    /* ---- ANIMATED GRADIENT BORDER GLOW ON HOVER ---- */
+    .feat-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 16px;
+      background: conic-gradient(from var(--card-angle, 0deg), var(--red), var(--cyan), var(--purple), var(--green), var(--red));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      padding: 1.5px;
+    }
+
+    .feat-card:hover::after {
+      opacity: 0.6;
+      animation: borderRotate 3s linear infinite;
+    }
+
+    @keyframes borderRotate {
+      to {
+        --card-angle: 360deg;
+      }
+    }
+
+    @property --card-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    /* ---- ENHANCED NAV GLASS ---- */
+    .nav.scrolled {
+      background: rgba(3, 3, 8, 0.75);
+      backdrop-filter: blur(24px) saturate(1.6);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ---- NAV ACTIVE LINK ---- */
+    .nav-links a.active {
+      color: var(--text-white);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+      background: var(--red);
+    }
+
+    /* ---- ANIMATED DIVIDERS ---- */
+    .divider {
+      position: relative;
+      height: 1px;
+      border: none;
+      overflow: visible;
+    }
+
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--red), var(--cyan), var(--purple), transparent);
+      background-size: 200% 100%;
+      animation: dividerShimmer 6s ease-in-out infinite;
+    }
+
+    @keyframes dividerShimmer {
+
+      0%,
+      100% {
+        background-position: 0% center;
+      }
+
+      50% {
+        background-position: 200% center;
+      }
+    }
+
+    /* ---- HERO TITLE OUTLINE STROKE ANIMATION ---- */
+    .hero-sub {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(230, 57, 70, 0.15), rgba(0, 240, 255, 0.1), rgba(255, 255, 255, 0.08));
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.12);
+      animation: slideUp .9s .45s var(--ease) forwards, subtitleShimmer 8s ease-in-out infinite;
+    }
+
+    @keyframes subtitleShimmer {
+
+      0%,
+      100% {
+        background-position: 0% center;
+      }
+
+      50% {
+        background-position: 100% center;
+      }
+    }
+
+    /* ---- FOOTER GLOW LINE ---- */
+    footer {
+      border-top: none;
+    }
+
+    footer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+    }
+
+    /* ---- MAGNETIC BUTTON ---- */
+    .btn-primary.magnetic {
+      transition: transform 0.3s var(--ease), box-shadow 0.25s;
+    }
+
+    /* ---- ENHANCED TERMINAL GLOW ---- */
+    .terminal {
+      box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.05), 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .terminal:hover {
+      box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.1), 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 240, 255, 0.03);
+    }
+
+    /* ---- TOOL PILL HOVER GLOW ---- */
+    .tool-pill:hover {
+      background: rgba(230, 57, 70, 0.08);
+      border-color: rgba(230, 57, 70, 0.25);
+      color: var(--red);
+      box-shadow: 0 0 12px rgba(230, 57, 70, 0.15);
+    }
+
+    /* ---- STATS NUMBER GLOW ---- */
+    .stat-number {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* ---- HERO STAT DIVIDERS ---- */
+    .hero-stats>div {
+      position: relative;
+    }
+
+    .hero-stats>div:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -24px;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(230, 57, 70, 0.3), transparent);
+    }
+
+    @media(max-width:640px) {
+      .hero-stats>div:not(:last-child)::after {
+        display: none;
+      }
+    }
+
+    /* ---- ENHANCED COMPARE TABLE GLOW ---- */
+    .compare-table th.ours {
+      text-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
+    }
+
+    /* ---- SWARM CENTER ENHANCED ---- */
+    .swarm-center {
+      box-shadow: 0 0 30px var(--red-glow), inset 0 0 20px rgba(230, 57, 70, 0.1);
+    }
+
+    /* ---- QUICKSTART NUMBER GLOW ---- */
+    .qs-num {
+      box-shadow: 0 4px 20px rgba(230, 57, 70, 0.3);
+    }
+
+    /* ---- FOOTER BUILT-WITH ---- */
+    .footer-built {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: .1em;
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 24px;
+    }
+
+    .footer-built span {
+      color: var(--red);
+    }
   </style>
 </head>
 
@@ -2644,7 +3085,8 @@
       <div class="hero-content">
         <div class="hero-eyebrow"><span class="dot"></span>AI-Powered Offensive Security Platform</div>
         <h1 class="hero-title">
-          <span class="accent">OmWick</span>OS
+          <span class="accent glitch" data-text="OmWick" id="glitchText">OmWick</span>OS
+          <span class="version-badge"><span class="live-dot"></span>v1.0.0</span>
         </h1>
         <div class="hero-sub">SPECTER BUILD</div>
         <p class="hero-desc">
@@ -3979,6 +4421,7 @@
           <div class="footer-author-name"><span>Rithwick</span> Krishna</div>
         </div>
       </div>
+      <div class="footer-built">Built with <span></span> for those who hack differently</div>
       <div class="footer-bottom">
         <div class="footer-links">
           <a href="#">GitHub</a>
@@ -4226,6 +4669,88 @@
       }, { threshold: 0.3 });
 
       document.querySelectorAll('.terminal-body').forEach(el => terminalObserver.observe(el));
+
+      /* ═══════════════════════════════════════════
+         3D CARD TILT ON HOVER
+         ═══════════════════════════════════════════ */
+      const tiltCards = document.querySelectorAll('.feat-card, .agent-card, .battle-card, .showcase-card');
+      tiltCards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          card.style.transition = 'transform 0.5s var(--ease)';
+          setTimeout(() => { card.style.transition = ''; }, 500);
+        });
+      });
+
+      /* ═══════════════════════════════════════════
+         PERIODIC GLITCH BURST
+         ═══════════════════════════════════════════ */
+      const glitchEl = document.getElementById('glitchText');
+      if (glitchEl) {
+        function triggerGlitch() {
+          glitchEl.classList.add('active');
+          setTimeout(() => glitchEl.classList.remove('active'), 300);
+        }
+        setInterval(triggerGlitch, 5000 + Math.random() * 3000);
+        glitchEl.addEventListener('mouseenter', triggerGlitch);
+      }
+
+      /* ═══════════════════════════════════════════
+         MAGNETIC DOWNLOAD BUTTON
+         ═══════════════════════════════════════════ */
+      const magneticBtn = document.querySelector('.btn-primary');
+      if (magneticBtn) {
+        magneticBtn.classList.add('magnetic');
+        magneticBtn.addEventListener('mousemove', e => {
+          const rect = magneticBtn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          magneticBtn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-2px)`;
+        });
+        magneticBtn.addEventListener('mouseleave', () => {
+          magneticBtn.style.transform = '';
+        });
+      }
+
+      /* ═══════════════════════════════════════════
+         PARALLAX ORBS ON SCROLL
+         ═══════════════════════════════════════════ */
+      const orbs = document.querySelectorAll('.orb');
+      const speeds = [0.03, -0.02, 0.015];
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        orbs.forEach((orb, i) => {
+          const speed = speeds[i] || 0.01;
+          orb.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+      }, { passive: true });
+
+      /* ═══════════════════════════════════════════
+         ACTIVE NAV LINK HIGHLIGHTING
+         ═══════════════════════════════════════════ */
+      const sections = document.querySelectorAll('section[id]');
+      const navLinksAll = document.querySelectorAll('.nav-links a[href^="#"]');
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinksAll.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '-72px 0px -50% 0px' });
+      sections.forEach(s => sectionObserver.observe(s));
 
       /* ═══════════════════════════════════════════
          SMOOTH ANCHOR SCROLLING
